@@ -45,7 +45,7 @@ class Plugin extends PluginBase
             'description' => 'spanjaan.blogportal::lang.plugin.description',
             'author'      => 'S.p. Anjaan',
             'icon'        => 'icon-tags',
-            'homepage'    => 'https://github.com/Spanjaan/blogportal-plugin'
+            'homepage'    => 'https://github.com/spanjaan/blogportal'
         ];
     }
 
