@@ -2,7 +2,7 @@
     <a
         href="<?= Backend::url('spanjaan/blogportal/tags/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        <?= e(trans('ratmd.bloghub::lang.model.tags.tag_create')) ?>
+        <?= e(trans('spanjaan.blogportal::lang.model.tags.tag_create')) ?>
     </a>
 
     <button
