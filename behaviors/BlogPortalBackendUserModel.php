@@ -34,9 +34,9 @@ class BlogPortalBackendUserModel extends ExtensionBase
         $this->model = $model;
 
         // Deprecated Methods
-        $model->addDynamicMethod('blogportal_display', fn () => $this->getBlogPortalAttribute()->display());
-        $model->addDynamicMethod('blogportal_slug', fn () => $this->getBlogPortalAttribute()->slug());
-        $model->addDynamicMethod('blogportal_about', fn () => $this->getBlogPortalAttribute()->about());
+        $model->addDynamicMethod('blogportal_display', fn () => $this->getBlogportalAttribute()->display());
+        $model->addDynamicMethod('blogportal_slug', fn () => $this->getBlogportalAttribute()->slug());
+        $model->addDynamicMethod('blogportal_about', fn () => $this->getBlogportalAttribute()->about());
     }
 
     /**
@@ -44,7 +44,7 @@ class BlogPortalBackendUserModel extends ExtensionBase
      *
      * @return BlogPortalBackendUser
      */
-    public function getBlogPortalAttribute()
+    public function getBlogportalAttribute()
     {
         if (empty($this->blogportalSet)) {
             $this->blogportalSet = new BlogPortalBackendUser($this->model);

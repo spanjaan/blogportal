@@ -7,11 +7,11 @@ namespace SpAnjaan\BlogPortal\Behaviors;
 use Cms\Classes\Controller;
 use October\Rain\Extension\ExtensionBase;
 use RainLab\Blog\Models\Post;
-use SpAnjaan\BlogPortal\Classes\BlogHubPost;
+use SpAnjaan\BlogPortal\Classes\BlogPortalPost;
 use SpAnjaan\BlogPortal\Models\Comment;
 use SpAnjaan\BlogPortal\Models\Tag;
 
-class BlogHubPostModel extends ExtensionBase
+class BlogPortalPostModel extends ExtensionBase
 {
     /**
      * Parent Post Model
@@ -21,11 +21,11 @@ class BlogHubPostModel extends ExtensionBase
     protected Post $model;
 
     /**
-     * BlogHub Post Model DataSet
+     * BlogPortal Post Model DataSet
      *
-     * @var ?BlogHubPost
+     * @var ?BlogPortalPost
      */
-    protected ?BlogHubPost $bloghubSet;
+    protected ?BlogPortalPost $blogportalSet;
 
     /**
      * Constructor
@@ -37,25 +37,25 @@ class BlogHubPostModel extends ExtensionBase
         $this->model = $model;
 
         // Add Blog Comments
-        $model->hasMany['ratmd_bloghub_comments'] = [
+        $model->hasMany['spanjaan_blogportal_comments'] = [
             Comment::class
         ];
 
-        $model->hasMany['ratmd_bloghub_comments_count'] = [
+        $model->hasMany['spanjaan_blogportal_comments_count'] = [
             Comment::class,
             'count' => true
         ];
 
         // Add Blog Tags
-        $model->belongsToMany['ratmd_bloghub_tags'] = [
+        $model->belongsToMany['spanjaan_blogportal_tags'] = [
             Tag::class,
-            'table' => 'ratmd_bloghub_tags_posts',
+            'table' => 'spanjaan_blogportal_tags_posts',
             'order' => 'slug'
         ];
 
         // Register Tags Scope
         $model->addDynamicMethod('scopeFilterTags', function ($query, $tags) {
-            return $query->whereHas('ratmd_bloghub_tags', function ($q) use ($tags) {
+            return $query->whereHas('spanjaan_blogportal_tags', function ($q) use ($tags) {
                 $q->withoutGlobalScope(NestedTreeScope::class)->whereIn('id', $tags);
             });
         });
@@ -72,56 +72,56 @@ class BlogHubPostModel extends ExtensionBase
      */
     protected function registerDeprecatedMethods(Post $model)
     {
-        $bloghub = $this->getBloghubAttribute();
+        $blogportal = $this->getBlogportalAttribute();
 
         // Dynamic Method - Receive Similar Posts from current Model
         $model->addDynamicMethod(
-            'bloghub_similar_posts',
-            fn ($limit = 3, $exclude = null) => $bloghub->getRelated($limit, $exclude)
+            'blogportal_similar_posts',
+            fn ($limit = 3, $exclude = null) => $blogportal->getRelated($limit, $exclude)
         );
 
         // Dynamic Method - Receive Random Posts from current Model
         $model->addDynamicMethod(
-            'bloghub_random_posts',
-            fn ($limit = 3, $exclude = null) => $bloghub->getRandom($limit, $exclude)
+            'blogportal_random_posts',
+            fn ($limit = 3, $exclude = null) => $blogportal->getRandom($limit, $exclude)
         );
 
         // Dynamic Method - Get Next Post in the same category
         $model->addDynamicMethod(
-            'bloghub_next_post_in_category',
-            fn () => $bloghub->getNext(1, true)
+            'blogportal_next_post_in_category',
+            fn () => $blogportal->getNext(1, true)
         );
 
         // Dynamic Method - Get Previous Post in the same category
         $model->addDynamicMethod(
-            'bloghub_prev_post_in_category',
-            fn () => $bloghub->getPrevious(1, true)
+            'blogportal_prev_post_in_category',
+            fn () => $blogportal->getPrevious(1, true)
         );
 
         // Dynamic Method - Get Next Post
         $model->addDynamicMethod(
-            'bloghub_next_post',
-            fn () => $bloghub->getNext()
+            'blogportal_next_post',
+            fn () => $blogportal->getNext()
         );
 
         // Dynamic Method - Get Previous Post
         $model->addDynamicMethod(
-            'bloghub_prev_post',
-            fn () => $bloghub->getPrevious()
+            'blogportal_prev_post',
+            fn () => $blogportal->getPrevious()
         );
     }
 
     /**
-     * Get main BlogHub Space
+     * Get main BlogPortal Space
      *
-     * @return BlogHubPost
+     * @return BlogPortalPost
      */
-    public function getBloghubAttribute()
+    public function getBlogportalAttribute()
     {
-        if (empty($this->bloghubSet)) {
-            $this->bloghubSet = new BlogHubPost($this->model);
+        if (empty($this->blogportalSet)) {
+            $this->blogportalSet = new BlogPortalPost($this->model);
         }
-        return $this->bloghubSet;
+        return $this->blogportalSet;
     }
 
     /**
@@ -131,7 +131,7 @@ class BlogHubPostModel extends ExtensionBase
      */
     protected function afterFetch()
     {
-        $tags = $this->model->ratmd_bloghub_tags;
+        $tags = $this->model->spanjaan_blogportal_tags;
         if ($tags->count() === 0) {
             return;
         }
@@ -142,8 +142,8 @@ class BlogHubPostModel extends ExtensionBase
             $viewBag = $ctrl->getLayout()->getViewBag()->getProperties();
 
             // Set Tag URL
-            if (isset($viewBag['bloghubTagPage'])) {
-                $tags->each(fn ($tag) => $tag->setUrl($viewBag['bloghubTagPage'], $ctrl));
+            if (isset($viewBag['blogportalTagPage'])) {
+                $tags->each(fn ($tag) => $tag->setUrl($viewBag['blogportalTagPage'], $ctrl));
             }
         }
     }
