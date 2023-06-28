@@ -390,4 +390,15 @@ return [
             ]
         ],
     ],
+    'widgets' => [
+        'comments_list' => [
+            'label' => 'BlogPortal - Comments List'
+        ],
+        'posts_list' => [
+            'label' => 'BlogPortal - Posts List'
+        ],
+        'posts_statistics' => [
+            'label' => 'BlogPortal - Posts Statistics'
+        ]
+    ]
 ];
