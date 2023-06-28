@@ -64,7 +64,7 @@ class PostsStatistics extends ReportWidgetBase
      */
     protected function loadAssets()
     {
-        $this->addCss('/plugins/spanjaan/blogportal/assets/css/widget-octoberv2.css');
+        $this->addCss('/plugins/spanjaan/blogportal/assets/css/widget-commentslist.css');
     }
 
     /**
