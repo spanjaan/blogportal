@@ -17,10 +17,18 @@
             "role": "Developer"
         }
     ],
-      "require": {
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
         "php": ">= 7.4 || >= 8.0",
         "composer/installers": "~1.0",
         "gregwar/captcha": "^1.1"
     },
-    "minimum-stability": "dev"
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
