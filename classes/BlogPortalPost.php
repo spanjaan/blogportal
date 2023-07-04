@@ -269,7 +269,7 @@ class BlogPortalPost implements CallsAnyMethod
             $categories = $this->model->categories->map(fn ($item) => $item->id)->all();
 
             $query->whereHas('categories', function ($query) use ($categories) {
-                return $query->whereIn('winter_blog_categories.id', $categories);
+                return $query->whereIn('rainlab_blog_categories.id', $categories);
             });
         }
 
@@ -296,7 +296,7 @@ class BlogPortalPost implements CallsAnyMethod
             $categories = $this->model->categories->map(fn ($item) => $item->id)->all();
 
             $query->whereHas('categories', function ($query) use ($categories) {
-                return $query->whereIn('winter_blog_categories.id', $categories);
+                return $query->whereIn('rainlab_blog_categories.id', $categories);
             });
         }
 
@@ -342,7 +342,7 @@ class BlogPortalPost implements CallsAnyMethod
         // Query
         $query = Post::with(['categories', 'featured_images', 'spanjaan_blogportal_tags'])
             ->whereHas('categories', function ($query) use ($categories) {
-                return $query->whereIn('winter_blog_categories.id', $categories);
+                return $query->whereIn('rainlab_blog_categories.id', $categories);
             })
             ->whereHas('spanjaan_blogportal_tags', function ($query) use ($tags) {
                 return $query->whereIn('spanjaan_blogportal_tags.id', $tags);
