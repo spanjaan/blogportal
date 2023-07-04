@@ -7,8 +7,9 @@ namespace SpAnjaan\BlogPortal\Classes;
 use Backend\Models\User;
 use Cms\Classes\Controller;
 use RainLab\Blog\Models\Post;
+use October\Contracts\Twig\CallsAnyMethod;
 
-class BlogPortalBackendUser
+class BlogPortalBackendUser implements CallsAnyMethod
 {
     /**
      * User Model

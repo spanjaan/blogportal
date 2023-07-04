@@ -8,8 +8,9 @@ use Cms\Classes\Controller;
 use Illuminate\Support\Collection;
 use RainLab\Blog\Models\Post;
 use SpAnjaan\BlogPortal\Models\Visitor;
+use October\Contracts\Twig\CallsAnyMethod;
 
-class BlogPortalPost
+class BlogPortalPost implements CallsAnyMethod
 {
     /**
      * Post Model
