@@ -363,7 +363,6 @@ class CommentSection extends ComponentBase
             $this->page['comments'] = $this->getComments();
 
             $this->addJs('/plugins/spanjaan/blogportal/assets/js/comments.js');
-            $this->addCss('/plugins/spanjaan/blogportal/assets/css/comments.css');
         }
     }
 
