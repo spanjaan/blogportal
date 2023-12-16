@@ -2,7 +2,7 @@
     "name": "spanjaan/blogportal-plugin",
     "type": "october-plugin",
     "version": "1.0.0",
-    "description": "Extends RainLab's Blog plugin with tag, archives and more.",
+    "description": "Extends RainLab's Blog plugin with tags, archives, and more.",
     "keywords": [
         "october", 
         "octobercms", 
@@ -20,15 +20,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">= 7.4 || >= 8.0",
-        "composer/installers": "~1.0",
+        "php": ">=7.4",
+        "october/rain": "~1.1",
         "gregwar/captcha": "^1.1"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true
+    "autoload": {
+        "psr-4": {
+            "Spanjaan\\BlogportalPlugin\\": "plugins/spanjaan/blogportal"
         }
     }
 }
